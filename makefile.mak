@@ -101,49 +101,49 @@ DEPFILES += $(patsubst %.c,%.d,$(wildcard *.c)) $(patsubst %.c,%.d,$(wildcard sr
 
 #Compile object files
 %.o: %.cpp
-    $(CC) $(DEBUGFLAGS_C++-Compiler) $(INCLUDES_SRC) $(DEFINES) -c -fmessage-length=0 -Wold-style-cast -Woverloaded-virtual -o $@ $<
+	$(CC) $(DEBUGFLAGS_C++-Compiler) $(INCLUDES_SRC) $(DEFINES) -c -fmessage-length=0 -Wold-style-cast -Woverloaded-virtual -o $@ $<
 
 #Compile object files
 #May need to replace $(CC) with $(GCC)
 %.o: %.c
-    $(CC) $(DEBUGFLAGS_C-Compiler) $(INCLUDES_SRC) $(DEFINES) -c -fmessage-length=0 -o $@ $<
+	$(CC) $(DEBUGFLAGS_C-Compiler) $(INCLUDES_SRC) $(DEFINES) -c -fmessage-length=0 -o $@ $<
 
 #Build application
 #Create two version of the file so when including the library you do not have to worry about a version
 all: $(OBJFILES)
-    $(CC) -o $(TARGET) $(OBJFILES) $(LIBRARIES)
-    $(CC) -o $(TARGET_VER) $(OBJFILES) $(LIBRARIES)
+	$(CC) -o $(TARGET) $(OBJFILES) $(LIBRARIES)
+	$(CC) -o $(TARGET_VER) $(OBJFILES) $(LIBRARIES)
 
 #Clean files
 clean:
-    rm -f $(OBJFILES) rm -f $(DEPFILES) rm -f $(TARGET) rm -rf $(TARGET_VER)
+	rm -f $(OBJFILES) rm -f $(DEPFILES) rm -f $(TARGET) rm -rf $(TARGET_VER)
 
 #Make Doxygen files
 doxygen:
-    cd docs && \
-    doxygen $(DOXYGEN_CONFIG)
+	cd docs && \
+		doxygen $(DOXYGEN_CONFIG)
 
 #Clean Doxygen files
 clean_doxygen:
-    rm -rf docs/html
-    rm -rf docs/latex
+	rm -rf docs/html
+	rm -rf docs/latex
 
 #Help option
 help:
-    @echo
-    @echo "  make [target] [OPTIONS]"
-    @echo
-    @echo " Targets:"
-    @echo "     all             Builds the app.  This is the default target."
-    @echo "     clean           Clean all the objects, apps and dependencies."
-    @echo "     help            Prints this message."
-    @echo "     doxygen         Create doxygen files"
-    @echo "     doxygen_clean   Clean doxygen files"
-    @echo " Options:"
-    @echo "     BUILD=rel       Build a release build (default)"
-    @echo "     BUILD=devel     Build a debug build"
-    @echo "                     "
-    @echo "     ARCH=arm        Build an ARM build (default)"
-    @echo "     ARCH=x86        Build an X86 build"
-    @echo "                     "
-    @echo
+	@echo
+	@echo "  make [target] [OPTIONS]"
+	@echo
+	@echo " Targets:"
+	@echo "     all             Builds the app.  This is the default target."
+	@echo "     clean           Clean all the objects, apps and dependencies."
+	@echo "     help            Prints this message."
+	@echo "     doxygen         Create doxygen files"
+	@echo "     doxygen_clean   Clean doxygen files"
+	@echo " Options:"
+	@echo "     BUILD=rel       Build a release build (default)"
+	@echo "     BUILD=devel     Build a debug build"
+	@echo "                     "
+	@echo "     ARCH=arm        Build an ARM build (default)"
+	@echo "     ARCH=x86        Build an X86 build"
+	@echo "                     "
+	@echo
